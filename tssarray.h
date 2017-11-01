@@ -61,7 +61,7 @@ public:
 	// Default ctor & ctor from size
 	// Strong Guarantee
 	explicit TSSArray(size_type size = size_type(0))
-		:_capacity(std::max(size, DEFAULT_CAP)),
+		:_capacity(std::max(size, size_type(DEFAULT_CAP))),
 		// _capacity must be declared before _data
 		_size(size),
 		_data(new value_type[_capacity])
@@ -183,6 +183,7 @@ public:
 	}
 
 	//Resize member function
+	// Pre: function is passed a nonnegative size_type
 	// Exception neutral
 	void resize(size_type newsize)
 	{
@@ -227,7 +228,7 @@ public:
 		}
 
 		// Place the item
-		*pos = *item;
+		*pos = item;
 
 		return pos;
 	}
