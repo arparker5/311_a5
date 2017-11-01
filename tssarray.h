@@ -224,7 +224,7 @@ public:
 
 		// Move all elements past the given position down 
 		for (iterator index = end(); index > pos; --index) {
-			*index = *(index -1);
+			std::swap(*(index-1), *index);
 		}
 
 		// Place the item
