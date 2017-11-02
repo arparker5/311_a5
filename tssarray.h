@@ -80,7 +80,7 @@ public:
 		}
 		catch (...)
 		{
-			delete this;
+			delete [] _data;
 			throw;
 		}
 	}
