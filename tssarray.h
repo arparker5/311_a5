@@ -1,5 +1,7 @@
 // tssarray.h
 // Duane Shaffer
+// Andrew Parker
+// Eric Cater
 // 25 Oct 2017
 //
 // For CS 311 Fall 2017
