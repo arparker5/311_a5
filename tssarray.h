@@ -199,14 +199,20 @@ public:
 
 		value_type * olddata = _data;
 		_data = new value_type[_capacity];
-		for (size_type i = 0; i < _size; ++i)
-		{
-			*(_data + i) = *(olddata + i);
+		try {
+            for (size_type i = 0; i < _size; ++i)
+            {
+                *(_data + i) = *(olddata + i);
+            }
+
+            _size = newsize;
 		}
-
-		_size = newsize;
+		catch(...) {
+            delete[] olddata;
+            throw;
+		}
 		delete[] olddata;
-
+        return;
 	}
 
 	// insert
@@ -223,7 +229,7 @@ public:
 		}
 
 		// Move all elements past the given position down
-		for (iterator index = end(); index > pos; --index) {
+		for (iterator index = end()-1; index > pos; --index) {
 			std::swap(*(index-1), *index);
 		}
 
