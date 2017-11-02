@@ -193,10 +193,10 @@ public:
 			return;
 		}
 
-		while (_capacity < newsize) 
+		while (_capacity < newsize)
 			_capacity *= 2;
 
-		
+
 		value_type * olddata = _data;
 		_data = new value_type[_capacity];
 		for (size_type i = 0; i < _size; ++i)
@@ -206,7 +206,7 @@ public:
 
 		_size = newsize;
 		delete[] olddata;
-		
+
 	}
 
 	// insert
@@ -222,7 +222,7 @@ public:
 			pos = begin() + std::distance(oldBegin, pos);
 		}
 
-		// Move all elements past the given position down 
+		// Move all elements past the given position down
 		for (iterator index = end(); index > pos; --index) {
 			std::swap(*(index-1), *index);
 		}
@@ -236,10 +236,19 @@ public:
 	// Exception neutral
 	iterator erase(iterator pos)
 	{
-		// TODO: WRITE THIS!!!
-		return begin();  // DUMMY
+		resize(_size-1);
+		if(pos == end())
+            return end();
+
+		value_type *swapptr = pos;
+        while(swapptr != end())
+        {
+            std::swap(*swapptr, *(swapptr+1));
+            ++swapptr;
+        }
+        return pos;
 	}
-	
+
 	// push_back
 	// InsertEnd operation.
 	// ??? Guarantee
