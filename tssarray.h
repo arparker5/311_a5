@@ -35,6 +35,8 @@
 //     _data points to an array of int, allocated with new[], owned by
 //      *this, holding _capacity ints. Exception: _data may be nullptr,
 //      if _capacity == 0.
+// Requirements on types:
+//		dctor, move ctor, and move assignment must not throw
 template <typename T>
 class TSSArray {
 
@@ -107,6 +109,7 @@ public:
 	}
 
 	// Copy assignment
+	// Strong guarantee
 	TSSArray & operator=(const TSSArray & rhs)
 	{
 		if (this == &rhs)
@@ -186,6 +189,7 @@ public:
 
 	//Resize member function
 	// Pre: function is passed a nonnegative size_type
+	// Strong guarantee
 	// Exception neutral
 	void resize(size_type newsize)
 	{
@@ -218,6 +222,8 @@ public:
 	}
 
 	// insert
+	// Pre: pos is a valid iterator to a TSSArray object
+	// Strong Guarantee
 	// Exception neutral
 	iterator insert(iterator pos,
 		const value_type & item)
@@ -241,6 +247,8 @@ public:
 		return pos;
 	}
 	// erase
+	// Pre: pos is a valid iterator to a TSSArray object
+	// Strong Guarantee
 	// Exception neutral
 	iterator erase(iterator pos)
 	{
@@ -259,7 +267,7 @@ public:
 
 	// push_back
 	// InsertEnd operation.
-	// ??? Guarantee
+	// Strong Guarantee
 	// Exception neutral
 	void push_back(const value_type & item)
 	{
@@ -270,7 +278,7 @@ public:
 	// RemoveEnd operation.
 	// Pre:
 	//     _size > 0.
-	// ??? Guarantee
+	// Strong Guarantee
 	// Exception neutral
 	void pop_back()
 	{
