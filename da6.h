@@ -1,5 +1,5 @@
 // da6.h
-// Duane Shaffer
+// Duane Shaffer, Andrew Parker, Eric Cater
 // 5 Nov 2017
 //
 // For CS 311 Fall 2017
