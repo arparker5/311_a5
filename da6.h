@@ -15,6 +15,8 @@ using std::size_t;
 using std::shared_ptr;
 using std::make_shared;
 #include "llnode2.h"
+#include <functional>
+using std::function;
 
 
 // *** I think that the reverseList is implemented properly but can't check since the program doesn't compile yet ***
@@ -201,8 +203,7 @@ public:
 	// Strong Guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
-	template <typename funcType>
-	void traverse(funcType) {
+	void traverse(function<void(KeyType, ValType)> function) {
 		return;
 	}
 
