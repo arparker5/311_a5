@@ -17,18 +17,31 @@ using std::make_shared;
 #include "llnode2.h"
 
 
+// *** I think that the reverseList is implemented properly but can't check since the program doesn't compile yet ***
+
 template<typename ValType>
 void reverseList(shared_ptr<LLNode2<ValType> > & head) {
-	// do a 3 pointer rotate on hea, newhead, head->_next
+	// do a 3 pointer rotate on head, newhead, head->_next
 
-	LLNode2<ValType> newhead;
-	while (!head->empty()) {
+	if (isEmpty(head)) {
+		return;
+	}
 
+	//newhead will be empty of data by default due to shared_ptr
+	shared_ptr<LLNode2> tempHead;
+	make_shared<LLNode2<ValType> > newhead;
+
+	while (!isEmpty(head)) {
+		// Save the next element of the given linked list
+		tempHead = head._next;
+		// 3 pointer rotate
+		head._next = newhead;
+		newhead = head;
+		head = tempHead;
 	}
 	head = newhead;
-
+	return;
 }
-// *** skeleton for LLMap was based off LLNode2. Likely need to delete the associated functions that came from it. ***
 // class LLMap
 // Linked List node with client-specified value type. It is expected
 // that LLMap objects will be created with make_shared, and always
@@ -43,26 +56,22 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 template<typename KeyType, typename DataType>
 class LLMap {
 private:
-	// *** Members need to be changed. Requirements are for one and only one data member ***
-	DataType             _data;  // Data for this node
-	shared_ptr<LLMap> _next;  // Ptr to next node, or empty if none
 
-								// The following simplify creation & destruction
+	shared_ptr<LLNode2<KeyType> > _Node;
 
-								// 1- & 2-param ctor
-								// Pre: None.
-								// Post:
-								//     _data == data.
-								//     If _next passed, then _next == next. Otherwise, _next is
-								//      empty.
-								// Strong guarantee
-								// Throws what & when a ValType operation throws.
-								// Exception neutral
+	// The following simplify creation & destruction
+	// 1- & 2-param ctor
+	// Pre: None.
+	// Post:
+	//     _data == data.
+	//     If _next passed, then _next == next. Otherwise, _next is
+	//      empty.
+	// Strong guarantee
+	// Throws what & when a ValType operation throws.
+	// Exception neutral
 public:
-	explicit LLMap(const ValType & data,
-		shared_ptr<LLMap> next = nullptr)
-		:_data(data),
-		_next(next)
+	explicit LLMap(KeyType key, DataType data)
+		:_Node(shared_ptr<LLNode2<KeyType> > (data))
 	{}
 
 	~LLMap() = default;
@@ -128,10 +137,11 @@ public:
 	// Strong Guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
-	const DataType* find(KeyType key_to_find) {
+	const DataType* find(KeyType key_to_find) const{
 		DataType * dummy;
 		return dummy;
 	}
+
 	DataType* find(KeyType key_to_find) {
 		DataType * dummy;
 		return dummy;
@@ -191,7 +201,10 @@ public:
 	// Strong Guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
-	// void traverse( *** Not sure on how to declare this one ***
+	template <typename funcType> 
+	void traverse(funcType) {
+		return;
+	}
 
 
 }; // End class LLMap
