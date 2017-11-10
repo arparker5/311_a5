@@ -28,8 +28,8 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 	}
 
 	//newhead will be empty of data by default due to shared_ptr
-	shared_ptr<LLNode2> tempHead;
-	make_shared<LLNode2<ValType> > newhead;
+	shared_ptr<LLNode2<ValType> > tempHead = make_shared<LLNode2<ValType> >;
+	shared_ptr<LLNode2<ValType> > newhead = make_shared<LLNode2<ValType> >;
 
 	while (!isEmpty(head)) {
 		// Save the next element of the given linked list
@@ -106,9 +106,9 @@ public:
 	// empty
 	// *** Description ***
 	// Pre:
-	//     
+	//
 	// Post:
-	//     
+	//
 	// Requirements on Types: *** Copied from another function. Likely need editing ***
 	//     ValType must have a copy ctor and a dctor.
 	//     ValType dctor must not throw.
@@ -120,16 +120,16 @@ public:
 
 
 		// *** TO DO ***
-		
+
 		return true; // DUMMY RETURN
 	}
 	// find
 	// const and non-const versions
 	// *** Description ***
 	// Pre:
-	//     
+	//
 	// Post:
-	//     
+	//
 	// Requirements on Types: *** Copied from another function. Likely need editing ***
 	//     ValType must have a copy ctor and a dctor.
 	//     ValType dctor must not throw.
@@ -150,9 +150,9 @@ public:
 	// insert
 	// *** Description ***
 	// Pre:
-	//     
+	//
 	// Post:
-	//     
+	//
 	// Requirements on Types: *** Copied from another function. Likely need editing ***
 	//     ValType must have a copy ctor and a dctor.
 	//     ValType dctor must not throw.
@@ -171,9 +171,9 @@ public:
 	// erase
 	// *** Description ***
 	// Pre:
-	//     
+	//
 	// Post:
-	//     
+	//
 	// Requirements on Types: *** Copied from another function. Likely need editing ***
 	//     ValType must have a copy ctor and a dctor.
 	//     ValType dctor must not throw.
@@ -182,18 +182,18 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	void erase(KeyType key) {
-		
+
 
 		// *** TO DO ***
-		
+
 		return;
 	}
 	// traverse
 	// *** Description ***
 	// Pre:
-	//     
+	//
 	// Post:
-	//     
+	//
 	// Requirements on Types: *** Copied from another function. Likely need editing ***
 	//     ValType must have a copy ctor and a dctor.
 	//     ValType dctor must not throw.
@@ -201,7 +201,7 @@ public:
 	// Strong Guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
-	template <typename funcType> 
+	template <typename funcType>
 	void traverse(funcType) {
 		return;
 	}
