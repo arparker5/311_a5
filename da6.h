@@ -200,17 +200,24 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	void erase(KeyType key) {
-        auto p = _head;  // Iterates through list
-        auto o = _head;
-		while (p)
-		{
-            o = p;
-            if(p->_data.first == key){
-               o = p->_next;
-            }
 
-			p = p->_next;
-		}
+        if(_head->_data.first == key){
+            _head=_head->_next;
+        }
+        else{
+            auto p = _head;  // Iterates through list
+            auto o = _head;
+            while (p)
+            {
+                o = p;
+                p = p->_next;
+                if(p && p->_data.first == key){
+                    cout<<"asdga"<<endl;
+                    o->_next = p->_next;
+                    return;
+                }
+            }
+        }
 
 		return;
 	}
