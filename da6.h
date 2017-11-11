@@ -19,7 +19,6 @@ using std::make_shared;
 using std::function;
 
 
-// *** I think that the reverseList is implemented properly but can't check since the program doesn't compile yet ***
 
 template<typename ValType>
 // pre: none
@@ -56,6 +55,8 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 // Requirements on Types:
 //     ValType must have a copy ctor and a dctor.
 //     ValType dctor must not throw.
+//     ValType must have operator<< (stream insertion).
+//     Throws what & when a ValType operation throws.
 template<typename KeyType, typename DataType>
 //class invariants: none
 class LLMap {
@@ -149,7 +150,7 @@ public:
 	}
 
 	// Pre: none
-	// no throw guarantee
+	// strong guarantee
 	// Exception neutral
 	void insert(KeyType key, DataType data) {
         DataType * place =  find(key);
@@ -188,7 +189,7 @@ public:
 	}
 
 	// Pre: none
-	// no throw guarantee
+	// basic guarantee
 	// Exception neutral
 	void traverse(function<void(KeyType, DataType)> func) {
 	    auto p = _head;
