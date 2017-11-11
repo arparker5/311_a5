@@ -60,9 +60,9 @@ class LLMap {
 private:
 	using KDTYPE = std::pair<KeyType, DataType>;
 
+    shared_ptr<LLNode2<KDTYPE> > _head;
 
 
-//	shared_ptr<LLNode2<KDType> > _Node;
 
 	// ctor
 	// Pre: None.
@@ -93,15 +93,15 @@ public:
 	// NOTE: The above are the requirements for LLNode2<ValType>; no member
 	// functions of ValType are actually used here.
 	// No-Throw Guarantee
-	size_t size (void) const{
-		//auto p = head;  // Iterates through list
-		//size_t n = 0;   // Number of nodes so far
-		//while (p)
-		//{
-		//	p = p->_next;
-		//	++n;
-		//}
-		return 1;
+	size_t size () const{
+		auto p = _head;  // Iterates through list
+		size_t n = 0;   // Number of nodes so far
+		while (p)
+		{
+			p = p->_next;
+			++n;
+		}
+		return n;
 	}
 
 	// empty
@@ -118,19 +118,11 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	bool empty() {
-
-
-		// *** TO DO ***
-
-		return true; // DUMMY RETURN
+        return !_head;
 	}
 
 	const bool empty() const {
-
-
-		// *** TO DO ***
-
-		return true; // DUMMY RETURN
+		return !_head;
 	}
 	// find
 	// const and non-const versions
@@ -147,13 +139,27 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	const DataType* find(KeyType key_to_find) const{
-		DataType * dummy = 0;
-		return dummy;
+        auto p = _head;  // Iterates through list
+		while (p)
+		{
+		  if(p->_data.first == key_to_find){
+                return &p->_data.second;
+		    }
+			p = p->_next;
+		}
+		return nullptr;
 	}
 
 	DataType* find(KeyType key_to_find) {
-		DataType * dummy = 0;
-		return dummy;
+        auto p = _head;  // Iterates through list
+		while (p)
+		{
+		  if(p->_data.first == key_to_find){
+                return &p->_data.second;
+		    }
+			p = p->_next;
+		}
+		return nullptr;
 	}
 
 	// insert
@@ -170,11 +176,14 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	void insert(KeyType key, DataType data) {
+        DataType * place =  find(key);
 
-
-		// *** TO DO ***
-
-		return;
+		if(place){
+            *place = data;
+		}
+		else{
+            _head = make_shared<LLNode2<KDTYPE> >(std::make_pair(key,data), _head);
+		}
 	}
 
 	// erase
@@ -191,9 +200,17 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	void erase(KeyType key) {
+        auto p = _head;  // Iterates through list
+        auto o = _head;
+		while (p)
+		{
+            o = p;
+            if(p->_data.first == key){
+               o = p->_next;
+            }
 
-
-		// *** TO DO ***
+			p = p->_next;
+		}
 
 		return;
 	}
@@ -210,11 +227,14 @@ public:
 	// Strong Guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
-	void traverse(function<void(KeyType, DataType)> function) {
-		
+	void traverse(function<void(KeyType, DataType)> func) {
+	    auto p = _head;
+        while (p)
+		{
+		    func(p->_data.first, p->_data.second);
+			p = p->_next;
+		}
 	}
-
-
 }; // End class LLMap
 
 #endif // DA6_H_INCLUDED
