@@ -30,14 +30,14 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 	}
 
 	//newhead will be empty of data by default due to shared_ptr
-	shared_ptr<LLNode2<ValType> > tempHead = make_shared<LLNode2<ValType> >;
-	shared_ptr<LLNode2<ValType> > newhead = make_shared<LLNode2<ValType> >;
+	shared_ptr<LLNode2<ValType> > tempHead; // = make_shared<LLNode2<ValType> >;
+	shared_ptr<LLNode2<ValType> > newhead; // = make_shared<LLNode2<ValType> >;
 
 	while (!isEmpty(head)) {
 		// Save the next element of the given linked list
-		tempHead = head._next;
+		tempHead = head->_next;
 		// 3 pointer rotate
-		head._next = newhead;
+		head->_next = newhead;
 		newhead = head;
 		head = tempHead;
 	}
@@ -58,22 +58,21 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 template<typename KeyType, typename DataType>
 class LLMap {
 private:
+	using KDTYPE = std::pair<KeyType, DataType>;
 
-	shared_ptr<LLNode2<KeyType> > _Node;
 
-	// The following simplify creation & destruction
-	// 1- & 2-param ctor
+
+//	shared_ptr<LLNode2<KDType> > _Node;
+
+	// ctor
 	// Pre: None.
 	// Post:
-	//     _data == data.
-	//     If _next passed, then _next == next. Otherwise, _next is
-	//      empty.
+
 	// Strong guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 public:
-	explicit LLMap(KeyType key, DataType data)
-		:_Node(shared_ptr<LLNode2<KeyType> > (data))
+	explicit LLMap()
 	{}
 
 	~LLMap() = default;
@@ -94,15 +93,15 @@ public:
 	// NOTE: The above are the requirements for LLNode2<ValType>; no member
 	// functions of ValType are actually used here.
 	// No-Throw Guarantee
-	size_t size (void){
-		auto p = head;  // Iterates through list
-		size_t n = 0;   // Number of nodes so far
-		while (p)
-		{
-			p = p->_next;
-			++n;
-		}
-		return n;
+	size_t size (void) const{
+		//auto p = head;  // Iterates through list
+		//size_t n = 0;   // Number of nodes so far
+		//while (p)
+		//{
+		//	p = p->_next;
+		//	++n;
+		//}
+		return 1;
 	}
 
 	// empty
@@ -125,6 +124,14 @@ public:
 
 		return true; // DUMMY RETURN
 	}
+
+	const bool empty() const {
+
+
+		// *** TO DO ***
+
+		return true; // DUMMY RETURN
+	}
 	// find
 	// const and non-const versions
 	// *** Description ***
@@ -140,12 +147,12 @@ public:
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
 	const DataType* find(KeyType key_to_find) const{
-		DataType * dummy;
+		DataType * dummy = 0;
 		return dummy;
 	}
 
 	DataType* find(KeyType key_to_find) {
-		DataType * dummy;
+		DataType * dummy = 0;
 		return dummy;
 	}
 
@@ -203,8 +210,8 @@ public:
 	// Strong Guarantee
 	// Throws what & when a ValType operation throws.
 	// Exception neutral
-	void traverse(function<void(KeyType, ValType)> function) {
-		return;
+	void traverse(function<void(KeyType, DataType)> function) {
+		
 	}
 
 
