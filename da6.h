@@ -22,6 +22,7 @@ using std::function;
 // *** I think that the reverseList is implemented properly but can't check since the program doesn't compile yet ***
 
 template<typename ValType>
+// pre: none
 void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 	// do a 3 pointer rotate on head, newhead, head->_next
 
@@ -56,6 +57,7 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 //     ValType must have a copy ctor and a dctor.
 //     ValType dctor must not throw.
 template<typename KeyType, typename DataType>
+//class invariants: none
 class LLMap {
 private:
 	using KDTYPE = std::pair<KeyType, DataType>;
@@ -64,12 +66,8 @@ private:
 
 
 
-	// ctor
-	// Pre: None.
-	// Post:
-
-	// Strong guarantee
-	// Throws what & when a ValType operation throws.
+	// Pre: none
+    // no throw Guarantee
 	// Exception neutral
 public:
 	explicit LLMap()
@@ -81,7 +79,8 @@ public:
 	LLMap & operator=(const LLMap & other) = delete;
 	LLMap & operator=(LLMap && other) = delete;
 
-	// size *** Change this stuff ***
+
+	// Based on llnode.h's size function
 	// Given shared_ptr to Linked List, return its size (number of nodes).
 	// Pre:
 	//     head is ptr to empty-ptr-terminated Linked List, or is empty.
@@ -104,39 +103,23 @@ public:
 		return n;
 	}
 
-	// empty
-	// *** Description ***
-	// Pre:
-	//
-	// Post:
-	//
-	// Requirements on Types: *** Copied from another function. Likely need editing ***
-	//     ValType must have a copy ctor and a dctor.
-	//     ValType dctor must not throw.
-	//     ValType must have operator<< (stream insertion).
-	// Strong Guarantee
-	// Throws what & when a ValType operation throws.
+	// Pre: none
+	// no throw Guarantee
 	// Exception neutral
 	bool empty() {
-        return !_head;
+        return !(_head);
 	}
 
+    // Pre: none
+	// no throw Guarantee
+	// Exception neutral
 	const bool empty() const {
-		return !_head;
+		return !(_head);
 	}
-	// find
-	// const and non-const versions
-	// *** Description ***
-	// Pre:
-	//
-	// Post:
-	//
-	// Requirements on Types: *** Copied from another function. Likely need editing ***
-	//     ValType must have a copy ctor and a dctor.
-	//     ValType dctor must not throw.
-	//     ValType must have operator<< (stream insertion).
-	// Strong Guarantee
-	// Throws what & when a ValType operation throws.
+
+
+	// Pre: none
+    // no throw Guarantee
 	// Exception neutral
 	const DataType* find(KeyType key_to_find) const{
         auto p = _head;  // Iterates through list
@@ -150,6 +133,9 @@ public:
 		return nullptr;
 	}
 
+	// Pre: none
+	// no throw guarantee
+	// Exception neutral
 	DataType* find(KeyType key_to_find) {
         auto p = _head;  // Iterates through list
 		while (p)
@@ -162,18 +148,8 @@ public:
 		return nullptr;
 	}
 
-	// insert
-	// *** Description ***
-	// Pre:
-	//
-	// Post:
-	//
-	// Requirements on Types: *** Copied from another function. Likely need editing ***
-	//     ValType must have a copy ctor and a dctor.
-	//     ValType dctor must not throw.
-	//     ValType must have operator<< (stream insertion).
-	// Strong Guarantee
-	// Throws what & when a ValType operation throws.
+	// Pre: none
+	// no throw guarantee
 	// Exception neutral
 	void insert(KeyType key, DataType data) {
         DataType * place =  find(key);
@@ -186,18 +162,8 @@ public:
 		}
 	}
 
-	// erase
-	// *** Description ***
-	// Pre:
-	//
-	// Post:
-	//
-	// Requirements on Types: *** Copied from another function. Likely need editing ***
-	//     ValType must have a copy ctor and a dctor.
-	//     ValType dctor must not throw.
-	//     ValType must have operator<< (stream insertion).
-	// Strong Guarantee
-	// Throws what & when a ValType operation throws.
+	// Pre: none
+	// no throw guarantee
 	// Exception neutral
 	void erase(KeyType key) {
 
@@ -212,7 +178,6 @@ public:
                 o = p;
                 p = p->_next;
                 if(p && p->_data.first == key){
-                    cout<<"asdga"<<endl;
                     o->_next = p->_next;
                     return;
                 }
@@ -221,18 +186,9 @@ public:
 
 		return;
 	}
-	// traverse
-	// *** Description ***
-	// Pre:
-	//
-	// Post:
-	//
-	// Requirements on Types: *** Copied from another function. Likely need editing ***
-	//     ValType must have a copy ctor and a dctor.
-	//     ValType dctor must not throw.
-	//     ValType must have operator<< (stream insertion).
-	// Strong Guarantee
-	// Throws what & when a ValType operation throws.
+
+	// Pre: none
+	// no throw guarantee
 	// Exception neutral
 	void traverse(function<void(KeyType, DataType)> func) {
 	    auto p = _head;
