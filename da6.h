@@ -30,8 +30,8 @@ void reverseList(shared_ptr<LLNode2<ValType> > & head) {
 	}
 
 	//newhead will be empty of data by default due to shared_ptr
-	shared_ptr<LLNode2<ValType> > tempHead; // = make_shared<LLNode2<ValType> >;
-	shared_ptr<LLNode2<ValType> > newhead; // = make_shared<LLNode2<ValType> >;
+	shared_ptr<LLNode2<ValType> > tempHead; 
+	shared_ptr<LLNode2<ValType> > newhead;
 
 	while (!isEmpty(head)) {
 		// Save the next element of the given linked list
@@ -74,7 +74,11 @@ public:
 	explicit LLMap()
 	{}
 
-	~LLMap() = default;
+	~LLMap() {
+		while (_head != 0) {
+			_head = _head->_next;
+		}
+	}
 	LLMap(const LLMap & other) = delete;
 	LLMap(LLMap && other) = delete;
 	LLMap & operator=(const LLMap & other) = delete;
