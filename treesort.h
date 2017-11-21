@@ -218,7 +218,7 @@ struct node {
 	template<typename UserType>
 	void insert(UserType key) {
 
-		node* location = retrieve(key);
+		node<UserType>* location = retrieve(key);
 
 
 		// If the value and the key are not the same
@@ -238,11 +238,6 @@ struct node {
 				node<UserType> temp = location.right_child;
 				location.right_child = make_shared <node<UserType> >(key);
 			}
-		}
-		// If the value and the key are not the same
-		else {
-			if (location.left_child == nullptr)
-				location.left_child = make_shared <node<UserType> >(key);
 		}
 
 		return; // Dummy
