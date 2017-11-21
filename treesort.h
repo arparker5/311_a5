@@ -129,13 +129,13 @@ struct node {
 
 
 
-	UserType value;
-	node* left_child = nullptr;
-	node* right_child = nullptr;
-	node* parent = nullptr;
+	UserType _value;
+	node* _leftChild = nullptr;
+	node* _rightChild = nullptr;
+	node* _parent = nullptr;
 
 	node() = default;
-	node(UserType key) : value(key) {}
+	node(UserType key, node* parent) : _value(key), _parent(parent) {}
 
 	// Use auto-generated copy/move ctor, dctor, copy/move op=
 	node(const node & other) = default;
@@ -149,15 +149,15 @@ struct node {
 	// Exception neutral
 	iterator begin()
 	{
-		if (left_child != nullptr)
-			return left_child.begin();
+		if (_leftChild != nullptr)
+			return  _leftChild.begin();
 		else
 			return this;
 	}
 	const_iterator begin() const
 	{
-		if (left_child != nullptr)
-			return left_child.begin();
+		if (_leftChild != nullptr)
+			return  _leftChild.begin();
 		else
 			return this;
 	}
@@ -167,15 +167,15 @@ struct node {
 	// Exception neutral
 	iterator end()
 	{
-		if (right_child != nullptr)
-			return right_child.end();
+		if (_rightChild != nullptr)
+			return _rightChild.end();
 		else
 			return this;
 	}
 	const_iterator end() const
 	{
-		if (right_child != nullptr)
-			return right_child.end();
+		if (_rightChild != nullptr)
+			return _rightChild.end();
 		else
 			return this;
 	}
@@ -185,21 +185,21 @@ struct node {
 	// Exception neutral
 	iterator & operator++()
 	{
-		if (right_child != nullptr)
-			return right_child.begin();
-		else if (left_child == nullptr && parent.right_child == *this)
-			return parent.parent;
+		if (_rightChild != nullptr)
+			return _rightChild.begin();
+		else if (_left_child == nullptr && _parent._rightChild == *this)
+			return _parent._parent;
 		else
-			return parent;
+			return _parent;
 	}
 	const iterator & operator++() const
 	{
-		if (right_child != nullptr)
-			return right_child.begin();
-		else if (left_child == nullptr && parent.right_child == *this)
-			return parent.parent;
+		if (_rightChild != nullptr)
+			return _rightChild.begin();
+		else if (_leftChild == nullptr && _parent._rightChild == *this)
+			return _parent._parent;
 		else
-			return parent;
+			return _parent;
 	}
 
 };
@@ -222,21 +222,22 @@ struct node {
 
 
 		// If the value and the key are not the same
-		if (key < location.value)
-			location.left_child = make_shared <node<UserType> >(key);
+		if (key < location.value) {
+			location._leftChild = make_shared <node<UserType> >(key, this);
+		}
 		else if (location.value < key)
-			location.right_child = make_shared <node<UserType> >(key);
+			location._rightChild = make_shared <node<UserType> >(key, this);
 
 
 		// The keys must be the same
 		else {
 			// Insert the given key after the location if theres an opening
-			if (location.right_child == nullptr)
-				location.right_child = make_shared <node<UserType> >(key);
+			if (location._rightChild == nullptr)
+				location._rightChild = make_shared <node<UserType> >(key);
 			// If not, then make one
 			else {
 				node<UserType> temp = location.right_child;
-				location.right_child = make_shared <node<UserType> >(key);
+				location._rightChild = make_shared <node<UserType> >(key);
 			}
 		}
 
