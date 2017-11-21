@@ -135,7 +135,7 @@ struct node {
 	node* parent = nullptr;
 
 	node() = default;
-	node(UserType key): value(key) {}
+	node(UserType key) : value(key) {}
 
 	// Use auto-generated copy/move ctor, dctor, copy/move op=
 	node(const node & other) = default;
@@ -202,16 +202,20 @@ struct node {
 			return parent;
 	}
 
+};
+
+	template<typename UserType>
 	// function retrieve
 	// given a key, returns the location of the key.
 	// if the key is not in the list, returns the location of a parent that has a null left_child.
-	node* retrieve(UserType key) {
+	node<UserType>* retrieve(UserType key) {
 
 		// *** DO THIS ***
 
 		return nullptr; //Dummy
 	}
 
+	template<typename UserType>
 	void insert(UserType key) {
 
 		node* location = retrieve(key);
@@ -222,7 +226,7 @@ struct node {
 			location.left_child = make_shared <node<UserType> >(key);
 		else if (location.value < key)
 			location.right_child = make_shared <node<UserType> >(key);
-		
+
 
 		// The keys must be the same
 		else {
@@ -243,7 +247,6 @@ struct node {
 
 		return; // Dummy
 	}
-};
 
 
 // treesort
