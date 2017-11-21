@@ -1,3 +1,7 @@
+
+// *** Current work is at the bottom ***
+
+
 // treesort.h  INCOMPLETE
 // Glenn G. Chappell
 // 15 Nov 2017
@@ -214,12 +218,14 @@ struct node {
 
 
 		// If the value and the key are not the same
-		if ((location.value < key) || (key < location.value)) {
-			if (location.left_child == nullptr)
-				location.left_child = make_shared <node<UserType> >(key);
-		}
-		// If the value and the key are the same
-		if (!(location.value < key) && !(key < location.value)) {
+		if (key < location.value)
+			location.left_child = make_shared <node<UserType> >(key);
+		else if (location.value < key)
+			location.right_child = make_shared <node<UserType> >(key);
+		
+
+		// The keys must be the same
+		else {
 			// Insert the given key after the location if theres an opening
 			if (location.right_child == nullptr)
 				location.right_child = make_shared <node<UserType> >(key);
