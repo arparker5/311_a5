@@ -23,7 +23,11 @@ using std::distance;
 using std::shared_ptr;
 using std::make_shared;
 
-
+// struct Node
+// struct that is used by the Tree function and treesort
+// Each node holds a key value and a pointer to both of the node's children
+// Requirements on types:
+//		dctor, move ctor, and move assignment must not throw
 template<typename Valtype>
 struct Node{
     Valtype _key;
@@ -51,7 +55,14 @@ FDIter Insert(FDIter iter, N node)noexcept{
 
 
 
-
+// treesort
+// Sort a given range using Treesort.
+// Pre:
+//     ???
+// Requirements on Types:
+//     ???
+// Exception safety guarantee:
+//     ???
 template<typename FDIter>
 void treesort(FDIter first, FDIter last)
 {
