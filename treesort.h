@@ -1,3 +1,11 @@
+// treesort.h  
+// Duane Shaffer, Andrew Parker, Eric Cater
+// 15 Nov 2017
+//
+// For CS 311 Fall 2017
+// Header for function template treesort
+// There is no associated source file.
+
 
 #ifndef FILE_TREESORT_H_INCLUDED
 #define FILE_TREESORT_H_INCLUDED
@@ -20,7 +28,7 @@ template<typename Valtype>
 struct Node{
     Valtype _key;
     shared_ptr<Node<Valtype> > _rightptr;
-    shared_ptr<Node<valtype> > _leftptr;
+    shared_ptr<Node<Valtype> > _leftptr;
 
     explicit Node(Valtype item):_key(item), _rightptr(nullptr), _leftptr(nullptr){}
 
