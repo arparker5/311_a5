@@ -1,11 +1,3 @@
-// treesort.h  
-// Duane Shaffer, Andrew Parker, Eric Cater
-// 15 Nov 2017
-//
-// For CS 311 Fall 2017
-// Header for function template treesort
-// There is no associated source file.
-
 
 #ifndef FILE_TREESORT_H_INCLUDED
 #define FILE_TREESORT_H_INCLUDED
@@ -44,7 +36,7 @@ struct Tree{
 
 
 template<typename FDIter, typename N>
-FDIter Insert(FDIter iter, N node)noexcept{
+FDIter newlist(FDIter iter, N node)noexcept{
     //TO DO
     return iter;
 }
