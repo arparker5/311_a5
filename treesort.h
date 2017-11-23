@@ -1,4 +1,3 @@
-
 #ifndef FILE_TREESORT_H_INCLUDED
 #define FILE_TREESORT_H_INCLUDED
 
@@ -126,4 +125,3 @@ void treesort(FDIter first, FDIter last)
 
 
 #endif //#ifndef FILE_TREESORT_H_INCLUDED
-
