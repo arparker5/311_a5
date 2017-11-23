@@ -31,7 +31,48 @@ struct Node{
 
 template<typename Value>
 struct Tree{
+    shared_ptr<Node<Value> >rootptr = nullptr;
 
+    shared_ptr<Node<Value> > insert(Value key)noexcept//The insert function is given a key, and then inserts it in the correct place in the tree
+    {
+        if(rootptr == nullptr)//If there is no root yet, make this node the root
+        {
+            rootptr = make_shared<Node<Value> >(key);
+            return rootptr;
+        }
+        shared_ptr<Node<Value> > parent = rootptr;//If the node being entered is not the new root, set the rootptr to be the node's parent.
+        while(true)
+        {
+            if(key < parent->_key)
+            {
+                if(parent->_leftptr != nullptr)
+                {
+                    parent = parent->_leftptr;
+                }
+                else
+                {
+                    break;
+                }
+            }else{
+                if(parent->_rightptr != nullptr)
+                {
+                    parent = parent->_rightptr;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        auto newNode = make_shared<Node<Value> >(key);
+        if(key < parent->_key)
+        {
+            parent->_leftptr = newNode;
+        }else{
+            parent->_rightptr = newNode;
+        }
+        return newNode;
+    }
 };
 
 
