@@ -36,6 +36,16 @@ template<typename Value>
 struct Tree{
     shared_ptr<Node<Value> >rootptr = nullptr;
 
+
+// Sort a given range using Treesort.
+// Pre:
+//     none
+// Requirements on Types:
+//     ValType must have a copy ctor and a dctor.
+//      ValType dctor must not throw.
+
+// Exception safety guarantee:
+//     no throw
     shared_ptr<Node<Value> > insert(Value key)noexcept//The insert function is given a key, and then inserts it in the correct place in the tree
     {
         if(rootptr == nullptr)//If there is no root yet, make this node the root
@@ -79,6 +89,14 @@ struct Tree{
 };
 
 
+// Sort a given range using Treesort.
+// Pre:
+//     none
+// Requirements on Types:
+//     ValType must have a copy ctor and a dctor.
+//      ValType dctor must not throw.
+// Exception safety guarantee:
+//     no throw guarantee
 template<typename FDIter, typename N>
 FDIter newlist(FDIter iter, N node)noexcept{
 	if (node->_leftptr != nullptr) {
@@ -97,11 +115,12 @@ FDIter newlist(FDIter iter, N node)noexcept{
 // treesort
 // Sort a given range using Treesort.
 // Pre:
-//     ???
+//     FDIter must be iterator for a node
 // Requirements on Types:
-//     ???
+//     ValType must have a copy ctor and a dctor.
+//      ValType dctor must not throw.
 // Exception safety guarantee:
-//     ???
+//     exception neutral
 template<typename FDIter>
 void treesort(FDIter first, FDIter last)
 {
