@@ -82,8 +82,15 @@ struct Tree{
 
 template<typename FDIter, typename N>
 FDIter newlist(FDIter iter, N node)noexcept{
-    //TO DO
-    return iter;
+	if (node->_leftptr != nullptr) {
+		iter = newlist(iter, node->_leftptr);
+	}
+	*iter = node->_key;
+	iter++;
+	if (node->_rightptr != nullptr) {
+		iter = newlist(iter, node->_rightptr);
+	}
+	return iter;
 }
 
 
@@ -102,12 +109,16 @@ void treesort(FDIter first, FDIter last)
     // Get the type that FDIter points to
     using Value = typename remove_reference<decltype(*first)>::type;
 
-    // THE FOLLOWING IS DUMMY CODE. IT WILL PASS ALL TESTS. BUT IT DOES
-    // NOT MEET THE REQUIREMENTS OF THE ASSIGNMENT.
-    vector<Value> buff(distance(first, last));
-    copy(first, last, buff.begin());
-    stable_sort(buff.begin(), buff.end());
-    copy(buff.begin(), buff.end(), first);
+	if (first == last) {
+		return;
+	}
+
+	auto aTree = new Tree<Value>;
+	for (FDIter iter = first; iter != last; iter++) {
+		aTree->insert(*iter);
+	}
+	newlist(first, aTree->rootptr);
+	delete aTree;
 }
 
 
