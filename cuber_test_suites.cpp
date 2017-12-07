@@ -1,12 +1,13 @@
-// cuber_test_suites.cpp  INCOMPLETE
-// Glenn G. Chappell
-// 2 Dec 2017
+// cuber_test_suites.cpp
+// Duane Shaffer, Andrew Parker, Alex Cater
+// 7 Dec 2017
 //
 // For CS 311 Fall 2017
 // Tests for class Cuber: test suites
 // For Assignment 8, Exercise B
 // Uses the "Catch" unit-testing framework
 // Requires cuber_test_main.cpp, catch.hpp, cuber.h
+// Based off a skeleton file from Glen Chappell
 
 // Includes for code to be tested
 #include "cuber.h"         // For class Cuber
@@ -16,7 +17,6 @@
                            // Disable some features for faster compile
 #include "catch.hpp"       // For the "Catch" unit-testing framework
 #include <cmath>           // For std::pow
-// Additional includes for this test program
 
 
 // *********************************************************************
@@ -77,4 +77,5 @@ TEST_CASE("Cuber: Calculating Answers",
 			INFO("Handling 0");
 			REQUIRE(cc(0) == 0);
 		}
-	}}
+	}
+}
